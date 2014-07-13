@@ -21,15 +21,16 @@ namespace Controller
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-           App.FolderFileModels.LoadData();
+            App.FolderFileModels.LoadData();
         }
 
         private void FileOrFolderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (FileOrFolderList.SelectedItem != null)
             {
-                App.client.Send((FileOrFolderList.SelectedItem as FolderFileModel).FolderOrFilePath + "#");
-                
+                App.PresentWorkingDirectory += (FileOrFolderList.SelectedItem as FolderFileModel).FolderOrFileName + '\\';
+                App.client.Send(App.PresentWorkingDirectory + "#");
+
                 App.FolderFileModels.LoadData();
             }
             else
@@ -40,31 +41,35 @@ namespace Controller
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
-            App.PresentWorkingDirectory = (FileOrFolderList.SelectedItem as FolderFileModel).FolderOrFilePath;
-           // MessageBox.Show(App.PresentWorkingDirectory);
             App.PresentWorkingDirectory = getDirectory(ref e);
-            MessageBox.Show(App.PresentWorkingDirectory);
-            App.client.Send(App.PresentWorkingDirectory + "#");
-            App.FolderFileModels.LoadData();
-        }
-
-        private string getDirectory(ref System.ComponentModel.CancelEventArgs e)
-        {
             String[] temp = App.PresentWorkingDirectory.Split('\\');
-            String workingDirectory = String.Empty;
-
-            for (int i = 0; i < temp.Length-1; ++i) {
-                workingDirectory += temp[i] + "\\";
-            }
-
-            if (temp.Length > 1)
+            
+            if (temp.Length > 2)
             {
                 e.Cancel = true;
+                App.client.Send(App.PresentWorkingDirectory + "#");
+                App.FolderFileModels.LoadData();
             }
             else
             {
                 e.Cancel = false;
             }
+
+           
+        }
+
+        private string getDirectory(ref System.ComponentModel.CancelEventArgs e)
+        {
+            String[] temp = App.PresentWorkingDirectory.Split('\\');
+            
+            String workingDirectory = String.Empty;
+
+            for (int i = 0; i < temp.Length - 2; ++i)
+            {
+                if(temp[i] != String.Empty)
+                    workingDirectory += temp[i] + "\\";
+            }
+            
             return workingDirectory;
         }
     }

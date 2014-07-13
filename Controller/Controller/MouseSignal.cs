@@ -13,7 +13,7 @@ namespace Controller
         public const string TAP = "TAP";
         public const string DOUBLE_TAP = "DOUBLE_TAP";
         public const string HOLD = "HOLD";
-        public const string END_SIMULATION = "END_SIMULATION";
+        public const string END_SIMULATION = "END";
 
         private int _xCoordinate;
         private int _yCoordinate;

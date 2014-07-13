@@ -34,11 +34,5 @@ namespace Controller
                 NavigationService.Navigate(new Uri("/MousePad.xaml", UriKind.RelativeOrAbsolute));
             }
         }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-        }
-
     }
 }

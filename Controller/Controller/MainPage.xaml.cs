@@ -40,12 +40,23 @@ namespace Controller
                 // Instantiate the SocketClient
                 App.client = new SocketClient();
 
-                string result = App.client.Connect(txtRemoteHost.Text, 1212);
-                NavigationService.Navigate(new Uri("/Option.xaml", UriKind.RelativeOrAbsolute));
-                //MessageBox.Show(Path.GetFileName("E:\file\fi.tx"));
-                //NavigationExtensions.Navigate(this.NavigationService, "/Option.xaml", client);
+                App.client.Connect(txtRemoteHost.Text, 1212);
+                String isConnected = App.client.Receive();
+
+                if (isConnected == "connected")
+                {
+                    String width = (Application.Current.Host.Content.ActualWidth - 24).ToString();
+                    String height = (Application.Current.Host.Content.ActualHeight - 99).ToString();
+                    App.client.Send(width + '$' + height + '#');
+                    NavigationService.Navigate(new Uri("/Option.xaml", UriKind.RelativeOrAbsolute));
+                }
+                else
+                {
+                    MessageBox.Show("Can't Connect to the Server");
+                }
             }
         }
+
         #region UI Validation
         private bool ValidateInput()
         {

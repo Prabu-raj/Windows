@@ -9,6 +9,8 @@ namespace Controller.ViewModels
 {
     public class FolderFileModel : INotifyPropertyChanged
     {
+
+        
         private int _id;
         public int ID
         {
@@ -44,7 +46,7 @@ namespace Controller.ViewModels
             }
         }
 
-        private String _folderOrFilePath;
+       /* private String _folderOrFilePath;
         public String FolderOrFilePath
         {
             get
@@ -61,7 +63,7 @@ namespace Controller.ViewModels
                 }
             }
         }
-
+        */
         private string _imageUri;
 
         public string ImageUri {

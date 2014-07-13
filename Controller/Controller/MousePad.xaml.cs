@@ -62,22 +62,14 @@ namespace Controller
                 pointerCount = (from p in points where p.Action != TouchAction.Up select p).Count();
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            base.OnBackKeyPress(e);
-            App.client.Send(JsonConvert.SerializeObject(new MouseSignal(MouseSignal.END_SIMULATION)) + "#");
+            base.OnNavigatedFrom(e);
+            if (e.Content.ToString().Equals("Controller.Option"))
+            {
+                App.client.Send(JsonConvert.SerializeObject(new MouseSignal(MouseSignal.END_SIMULATION)) + "#");
+            }
         }
-
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            String width = (Application.Current.Host.Content.ActualWidth - 24).ToString();
-            String height = (Application.Current.Host.Content.ActualHeight - 99).ToString();
-            Thread.Sleep(500);
-            App.client.Send(width + "$" + height + "#");
-        }
-
 
         private void MousePad_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {

@@ -36,11 +36,20 @@ namespace Controller
         {
             if (MainLongListSelector.SelectedItem == null)
                 return;
-
+            App.PresentWorkingDirectory = (MainLongListSelector.SelectedItem as ItemViewModel).DriveName + '\\';
             App.client.Send((MainLongListSelector.SelectedItem as ItemViewModel).DriveName + "#");
             NavigationService.Navigate(new Uri("/FileExplorer.xaml", UriKind.RelativeOrAbsolute));
 
             MainLongListSelector.SelectedItem = null;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            if (e.Content.ToString().Equals("Controller.Option"))
+            {
+                App.client.Send(FolderOrFileDetails.END_EXPLORER + "#");
+            }
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Controller.ViewModels
                         {
                             ID = i,
                             FolderOrFileName = fileOrFolderName,
-                            FolderOrFilePath = folderOrFileDetails.FolderOrFilePath[i],
+                           // FolderOrFilePath = replace(folderOrFileDetails.FolderOrFilePath[i]),
                             IsFolder = folderOrFileDetails.IsFolder[i]
 
                         });
@@ -96,5 +96,9 @@ namespace Controller.ViewModels
             }
         }
 
+       /*private String replace(String replacementString)
+       {
+           return replacementString.Replace('?', '\\');
+       } */
     }
 }
