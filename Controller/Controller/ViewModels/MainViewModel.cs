@@ -16,24 +16,6 @@ namespace Controller.ViewModels
 
         public ObservableCollection<ItemViewModel> Items { get; private set; }
 
-        private string _sampleProperty = "Sample Runtime Property Value";
-        
-        public string SampleProperty
-        {
-            get
-            {
-                return _sampleProperty;
-            }
-            set
-            {
-                if (value != _sampleProperty)
-                {
-                    _sampleProperty = value;
-                    NotifyPropertyChanged("SampleProperty");
-                }
-            }
-        }
-
         public string LocalizedSampleProperty
         {
             get
@@ -66,11 +48,13 @@ namespace Controller.ViewModels
 
             for (int i = 0; i < systemDetails.DriveLabel.Length; ++i)
             {
+                
                 if (systemDetails.DriveLabel[i] != null)
                 {
                     this.Items.Add(new ItemViewModel()
                     {
                         ID = i.ToString(),
+                        DriveName = systemDetails.DriveName[i],
                         DriveLabel = systemDetails.DriveLabel[i],
                         DriveSizeUsed = systemDetails.DriveSizeUsed[i] + " GB Used",
                         DriveSizeFree = systemDetails.DriveSizeFree[i],

@@ -37,9 +37,8 @@ namespace Controller
             if (MainLongListSelector.SelectedItem == null)
                 return;
 
-            //MessageBox.Show((MainLongListSelector.SelectedItem as ItemViewModel).ID);
-
-            App.client.Send((MainLongListSelector.SelectedItem as ItemViewModel).DriveName);
+            App.client.Send((MainLongListSelector.SelectedItem as ItemViewModel).DriveName + "#");
+            NavigationService.Navigate(new Uri("/FileExplorer.xaml", UriKind.RelativeOrAbsolute));
 
             MainLongListSelector.SelectedItem = null;
         }

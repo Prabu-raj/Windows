@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Controller.ViewModels
 {
-    public class   FolderFileModel
+    public class FolderFileModel : INotifyPropertyChanged
     {
         private int _id;
         public int ID
@@ -20,7 +21,8 @@ namespace Controller.ViewModels
             {
                 if (value != _id)
                 {
-                    _id = value; 
+                    _id = value;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -37,24 +39,7 @@ namespace Controller.ViewModels
                 if (value != _folderOrFileName)
                 {
                     _folderOrFileName = value;
-                }
-            }
-        }
-
-        private String _fileExtension;
-        public String FileExtension
-        {
-
-            get
-            {
-                return _fileExtension;
-            }
-
-            set
-            {
-                if (value != _fileExtension)
-                {
-                    _fileExtension = value;
+                    NotifyPropertyChanged("FolderOrFileName");
                 }
             }
         }
@@ -72,11 +57,28 @@ namespace Controller.ViewModels
                 if (value != _folderOrFilePath)
                 {
                     _folderOrFilePath = value;
-
+                    NotifyPropertyChanged("FolderOrFilePath");
                 }
             }
         }
 
+        private string _imageUri;
+
+        public string ImageUri {
+            get
+            {
+                return _imageUri;
+            }
+            set
+            {
+                if (value != _imageUri)
+                {
+                    _imageUri = value;
+                    NotifyPropertyChanged("ImageUri");
+                }
+            }
+            
+        }
         private bool _isFolder;
         public bool IsFolder
         {
@@ -90,7 +92,25 @@ namespace Controller.ViewModels
                 if (value != _isFolder)
                 {
                     _isFolder = value;
+                    NotifyPropertyChanged("IsFolder");
                 }
+
+                if(IsFolder)
+                    ImageUri = "/Assets/DiskImage.png";
+                else
+                    ImageUri = "/Assets/File.png";
+             
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (null != handler)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

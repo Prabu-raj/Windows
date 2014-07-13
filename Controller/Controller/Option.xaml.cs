@@ -31,14 +31,13 @@ namespace Controller
             else if (item.Name == "Mouse_Control")
             {
                 App.client.Send("MOUSE_CONTROL#");
-                NavigationService.Navigate(new Uri("/SecondPage.xaml", UriKind.RelativeOrAbsolute));
+                NavigationService.Navigate(new Uri("/MousePad.xaml", UriKind.RelativeOrAbsolute));
             }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            //NavigationService.RemoveBackEntry();
         }
 
     }

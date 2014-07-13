@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,7 @@ using System.Windows;
 
 namespace Controller.ViewModels
 {
-   public class MainFolderOrFileModel
+   public class MainFolderOrFileModel : INotifyPropertyChanged
     {
         public MainFolderOrFileModel()
         {
@@ -26,35 +28,73 @@ namespace Controller.ViewModels
         public void LoadData()
         {
             String data = String.Empty;
-
             data = App.client.Receive();
 
             FolderOrFileDetails folderOrFileDetails = new FolderOrFileDetails();
             try
             {
-                folderOrFileDetails = JsonConvert.DeserializeObject<FolderOrFileDetails>(data);
+                folderOrFileDetails = (JsonConvert.DeserializeObject<FolderOrFileDetails>(data)) as FolderOrFileDetails;
             }
-            catch (JsonReaderException )
+            catch (JsonException e)
             {
-                MessageBox.Show("JSonReader Exception");
+                MessageBox.Show(e.ToString());
+                return;
             }
 
-            for (int i = 0; i < folderOrFileDetails.FolderOrFileName.Length; ++i)
+
+            try
             {
-                if (folderOrFileDetails.FolderOrFileName != null)
+                this.FilesOrFolders.Clear();
+                
+                for (int i = 0; i < folderOrFileDetails.FolderOrFileName.Length; ++i)
                 {
-                    this.FilesOrFolders.Add(new FolderFileModel()
-                    {
-                        ID = i,
-                        FileExtension = folderOrFileDetails.FileExtension[i],
-                        FolderOrFileName = folderOrFileDetails.FolderOrFileName[i],
-                        FolderOrFilePath = folderOrFileDetails.FolderOrFilePath[i],
-                        IsFolder = folderOrFileDetails.IsFolder[i]
-                    });
-                }
-            }
+                    String fileOrFolderName = String.Empty;
 
+                    if (folderOrFileDetails.FolderOrFileName != null)
+                    {
+                        if (!folderOrFileDetails.IsFolder[i] && folderOrFileDetails.FolderOrFileName[i] != String.Empty)
+                        {
+                            fileOrFolderName = folderOrFileDetails.FolderOrFileName[i]  + folderOrFileDetails.FileExtension[i];
+                        }
+                        else if (folderOrFileDetails.FolderOrFileName[i] != String.Empty) {
+                            fileOrFolderName = folderOrFileDetails.FolderOrFileName[i];
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                        
+                        this.FilesOrFolders.Add(new FolderFileModel()
+                        {
+                            ID = i,
+                            FolderOrFileName = fileOrFolderName,
+                            FolderOrFilePath = folderOrFileDetails.FolderOrFilePath[i],
+                            IsFolder = folderOrFileDetails.IsFolder[i]
+
+                        });
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.ToString());
+            }
+            
             this.IsDataLoaded = true;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+       
+       private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (null != handler)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
     }
 }

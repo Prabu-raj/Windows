@@ -1,0 +1,12 @@
+﻿<vm:MainViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:Controller.ViewModels"
+   >
+
+    <vm:MainViewModel.Items>
+        <vm:ItemViewModel ID="0" DriveName="design one" DriveSizeUsed="50 GB Used" DriveSizeFree="50 GB Free" DriveLabel="Local Disk" ProgressMax="100" ProgressMin="0" ProgressValue="50"/>
+        <vm:ItemViewModel ID="1" DriveName="design two" DriveSizeUsed="60 GB Used" DriveSizeFree="40 GB Free" DriveLabel="Local Disk" ProgressMax="100" ProgressMin="0" ProgressValue="60"/>
+    </vm:MainViewModel.Items>
+
+</vm:MainViewModel>

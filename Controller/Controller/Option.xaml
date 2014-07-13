@@ -26,16 +26,6 @@
             <Setter Property="Width" Value="173"/>
             <Setter Property="Height" Value="173"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Grid>
-                            <Rectangle Fill="{TemplateBinding Background}"/>
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
     </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed 2e5e5e-->
@@ -57,28 +47,14 @@
                      Margin="3,321,3,-341" 
                      x:Name="ListBoxFile"
                      SelectionChanged="ListBox_SelectionChanged">
-                <!-- set its ItemsPanel to be a WrapPanel -->
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-
-                <ListBoxItem x:Name="File_Browser" Margin="10,0,70,0">
-                    <Image Source="/Assets/FileExplorer.png" />
+                <ListBoxItem x:Name="File_Browser" Margin="0">
+                    <Image Source="/Assets/FileExplorer.png" Height="187" Width="177" />
                 </ListBoxItem>
             </ListBox>
             <ListBox ItemContainerStyle="{StaticResource TileListBoxItemStyle}"
                      Margin="263,321,3,-341" 
                      x:Name="ListBoxMouse"
                      SelectionChanged="ListBox_SelectionChanged">
-                <!-- set its ItemsPanel to be a WrapPanel -->
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-
                 <ListBoxItem x:Name="Mouse_Control" Margin="0">
                     <Image Source="/Assets/TouchPad.png" />
                 </ListBoxItem>

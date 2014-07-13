@@ -13,9 +13,9 @@ namespace Controller.ViewModels
     public class ItemViewModel : INotifyPropertyChanged
     {
 
-        private string _id;
+        private String _id;
 
-        public string ID
+        public String ID
         {
             get
             {
@@ -31,9 +31,9 @@ namespace Controller.ViewModels
             }
         }
 
-        private string _driveName;
+        private String _driveName;
        
-        public string DriveName
+        public String DriveName
         {
             get
             {
@@ -49,9 +49,9 @@ namespace Controller.ViewModels
             }
         }
 
-        private string _driveSizeUsed;
-       
-        public string DriveSizeUsed
+        private String _driveSizeUsed;
+
+        public String DriveSizeUsed
         {
             get
             {
@@ -67,9 +67,9 @@ namespace Controller.ViewModels
             }
         }
 
-        private string _driveSizeFree;
-        
-        public string DriveSizeFree
+        private String _driveSizeFree;
+
+        public String DriveSizeFree
         {
             get
             {
@@ -85,9 +85,9 @@ namespace Controller.ViewModels
             }
         }
 
-        private string _driveLabel;
+        private String _driveLabel;
 
-        public string DriveLabel
+        public String DriveLabel
         {
             get
             {
@@ -103,9 +103,9 @@ namespace Controller.ViewModels
             }
         }
 
-        private string _progressMin;
+        private String _progressMin;
 
-        public string ProgressMin
+        public String ProgressMin
         {
             get
             {
@@ -122,9 +122,9 @@ namespace Controller.ViewModels
             }
         }
 
-        private string _machineName;
+        private String _machineName;
 
-        public string MachineName
+        public String MachineName
         {
             get
             {
@@ -141,9 +141,9 @@ namespace Controller.ViewModels
             }
         }
 
-        private string _progressMax;
+        private String _progressMax;
 
-        public string ProgressMax
+        public String ProgressMax
         {
             get
             {
@@ -159,9 +159,9 @@ namespace Controller.ViewModels
             }
         }
 
-        private string _progressValue;
+        private String _progressValue;
 
-        public string ProgressValue
+        public String ProgressValue
         {
             get
             {

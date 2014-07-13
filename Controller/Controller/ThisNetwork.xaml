@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignData SampleData/Sample.xaml}"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -45,7 +46,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Column="0" Source="/Assets/HardDrive.png" Margin="10,4,10,3"/>
-                                <TextBlock FontSize="35" Grid.Column="2" Text="{Binding DriveLabel}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" Margin="10,0,10,3"/>
+                                <TextBlock FontSize="35" Grid.Column="1" Text="{Binding DriveLabel}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" Margin="10,0,10,3"/>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>

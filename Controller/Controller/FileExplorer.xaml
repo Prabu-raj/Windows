@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignData SampleData/FileSample.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -14,20 +15,44 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot"  Background="#306c">
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
             <StackPanel  Margin="12,17,0,28">
-                <TextBlock Text="Sample" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                <TextBlock Text="Files" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
             </StackPanel>
 
             <phone:LongListSelector Margin="12,110,12,0"
                                     x:Name="FileOrFolderList" 
                                     SelectionChanged="FileOrFolderList_SelectionChanged"
-                                    ItemsSource="{Binding }">
+                                    ItemsSource="{Binding FilesOrFolders}">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="400"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column= "0" Source ="{Binding ImageUri}" Margin="13,7,6,6"
+                                       HorizontalAlignment="Left" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Height="100" 
+                                       />
+                                <TextBlock FontSize="30" Grid.Column="1" 
+                                           Text="{Binding FolderOrFileName}" 
+                                           TextWrapping="Wrap" 
+                                           Style="{StaticResource PhoneTextExtraLargeStyle}" 
+                                           Margin="15,0,10,3"/>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
             </phone:LongListSelector>
+            
 
         </Grid>
     </Grid>

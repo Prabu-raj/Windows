@@ -145,6 +145,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SampleData\FileSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SampleData\Sample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ThisNetwork.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,15 +172,11 @@
     </Content>
     <Content Include="Assets\BadgeLogo.png" />
     <Content Include="Assets\DiskImage.png" />
+    <Content Include="Assets\File.png" />
     <Content Include="Assets\FileExplorer.png" />
     <Content Include="Assets\HardDrive.png" />
     <Content Include="Assets\images.jpg" />
-    <Content Include="Assets\Logo.png" />
     <Content Include="Assets\PhoneComputerConnection.jpg" />
-    <Content Include="Assets\SplashScreen.png" />
-    <Content Include="Assets\SquareTile150x150.png" />
-    <Content Include="Assets\SquareTile71x71.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -189,7 +193,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\TouchPad.png" />
-    <Content Include="Assets\WideLogo.png" />
     <Content Include="SplashScreenImage.screen-720p.jpg" />
     <Content Include="SplashScreenImage.screen-WVGA.jpg" />
     <Content Include="SplashScreenImage.screen-WXGA.jpg" />

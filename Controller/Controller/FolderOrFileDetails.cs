@@ -8,24 +8,8 @@ namespace Controller
 {
     class FolderOrFileDetails
     {
-        private int[] _id;
-        public int[] ID
-        {
-            get
-            {
-                return _id;
-            }
-
-            set
-            {
-                if (value != _id)
-                {
-                    _id = value;
-                }
-            }
-        }
-
-        private String[] _folderOrFileName;
+       
+        private String[] _folderOrFileName ;
         public String[] FolderOrFileName
         {
             get

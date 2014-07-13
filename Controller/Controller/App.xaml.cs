@@ -29,16 +29,34 @@ namespace Controller
             }
         }
 
-        private static MainFolderOrFileModel folderFileModel = null;
+        private static MainFolderOrFileModel folderFileModels = null;
 
-        public static MainFolderOrFileModel FolderFileModel
+        public static MainFolderOrFileModel FolderFileModels
         {
             get
             {
-                if (folderFileModel == null)
-                    folderFileModel = new MainFolderOrFileModel();
+                if (folderFileModels == null)
+                    folderFileModels = new MainFolderOrFileModel();
 
-                return folderFileModel;
+                return folderFileModels;
+            }
+        }
+
+        private static String _presentWorkingDirectory;
+
+        public static String PresentWorkingDirectory
+        {
+            get
+            {
+                return _presentWorkingDirectory;
+            }
+
+            set
+            {
+                if (value != _presentWorkingDirectory)
+                {
+                    _presentWorkingDirectory = value;
+                }
             }
         }
         /// <summary>

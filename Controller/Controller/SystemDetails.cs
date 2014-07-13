@@ -23,6 +23,21 @@ namespace Controller
         private String _machineName;
         private String _osVersion;
 
+        private String[] _driveName;
+
+        public String[] DriveName
+        {
+            get
+            {
+                return _driveName;
+            }
+
+            set
+            {
+                if (value != _driveName)
+                    _driveName = value;
+            }
+        }
         public String[] DriveSizeUsed
         {
             get

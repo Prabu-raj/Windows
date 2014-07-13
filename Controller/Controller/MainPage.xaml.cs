@@ -18,6 +18,7 @@ using System.Net.Sockets;
 using Windows.Networking.Connectivity;
 using Microsoft.Phone.Reactive;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Controller
 {
@@ -41,6 +42,7 @@ namespace Controller
 
                 string result = App.client.Connect(txtRemoteHost.Text, 1212);
                 NavigationService.Navigate(new Uri("/Option.xaml", UriKind.RelativeOrAbsolute));
+                //MessageBox.Show(Path.GetFileName("E:\file\fi.tx"));
                 //NavigationExtensions.Navigate(this.NavigationService, "/Option.xaml", client);
             }
         }
