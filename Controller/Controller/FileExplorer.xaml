@@ -44,9 +44,9 @@
                                        />
                                 <TextBlock FontSize="30" Grid.Column="1" 
                                            Text="{Binding FolderOrFileName}" 
-                                           TextWrapping="Wrap" 
+                                           TextWrapping="NoWrap" 
                                            Style="{StaticResource PhoneTextExtraLargeStyle}" 
-                                           Margin="15,0,10,3"/>
+                                           Margin="15,20,10,3"/>
                             </Grid>
                         </StackPanel>
                     </DataTemplate>

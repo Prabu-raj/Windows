@@ -93,6 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="FileExplorer.xaml.cs">
       <DependentUpon>FileExplorer.xaml</DependentUpon>
     </Compile>
@@ -166,6 +167,69 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\48px\aac.png" />
+    <Content Include="Assets\48px\ai.png" />
+    <Content Include="Assets\48px\aiff.png" />
+    <Content Include="Assets\48px\avi.png" />
+    <Content Include="Assets\48px\bmp.png" />
+    <Content Include="Assets\48px\c.png" />
+    <Content Include="Assets\48px\cpp.png" />
+    <Content Include="Assets\48px\css.png" />
+    <Content Include="Assets\48px\dat.png" />
+    <Content Include="Assets\48px\dmg.png" />
+    <Content Include="Assets\48px\doc.png" />
+    <Content Include="Assets\48px\dotx.png" />
+    <Content Include="Assets\48px\dwg.png" />
+    <Content Include="Assets\48px\dxf.png" />
+    <Content Include="Assets\48px\eps.png" />
+    <Content Include="Assets\48px\exe.png" />
+    <Content Include="Assets\48px\flv.png" />
+    <Content Include="Assets\48px\gif.png" />
+    <Content Include="Assets\48px\h.png" />
+    <Content Include="Assets\48px\hpp.png" />
+    <Content Include="Assets\48px\html.png" />
+    <Content Include="Assets\48px\ics.png" />
+    <Content Include="Assets\48px\iso.png" />
+    <Content Include="Assets\48px\java.png" />
+    <Content Include="Assets\48px\jpg.png" />
+    <Content Include="Assets\48px\js.png" />
+    <Content Include="Assets\48px\key.png" />
+    <Content Include="Assets\48px\less.png" />
+    <Content Include="Assets\48px\mid.png" />
+    <Content Include="Assets\48px\mp3.png" />
+    <Content Include="Assets\48px\mp4.png" />
+    <Content Include="Assets\48px\mpg.png" />
+    <Content Include="Assets\48px\odf.png" />
+    <Content Include="Assets\48px\ods.png" />
+    <Content Include="Assets\48px\odt.png" />
+    <Content Include="Assets\48px\otp.png" />
+    <Content Include="Assets\48px\ots.png" />
+    <Content Include="Assets\48px\ott.png" />
+    <Content Include="Assets\48px\pdf.png" />
+    <Content Include="Assets\48px\php.png" />
+    <Content Include="Assets\48px\png.png" />
+    <Content Include="Assets\48px\ppt.png" />
+    <Content Include="Assets\48px\psd.png" />
+    <Content Include="Assets\48px\py.png" />
+    <Content Include="Assets\48px\qt.png" />
+    <Content Include="Assets\48px\rar.png" />
+    <Content Include="Assets\48px\rb.png" />
+    <Content Include="Assets\48px\rtf.png" />
+    <Content Include="Assets\48px\sass.png" />
+    <Content Include="Assets\48px\scss.png" />
+    <Content Include="Assets\48px\sql.png" />
+    <Content Include="Assets\48px\tga.png" />
+    <Content Include="Assets\48px\tgz.png" />
+    <Content Include="Assets\48px\tiff.png" />
+    <Content Include="Assets\48px\txt.png" />
+    <Content Include="Assets\48px\wav.png" />
+    <Content Include="Assets\48px\xls.png" />
+    <Content Include="Assets\48px\xlsx.png" />
+    <Content Include="Assets\48px\xml.png" />
+    <Content Include="Assets\48px\yml.png" />
+    <Content Include="Assets\48px\zip.png" />
+    <Content Include="Assets\48px\_blank.png" />
+    <Content Include="Assets\48px\_page.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -193,6 +257,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\TouchPad.png" />
+    <Content Include="Assets\Folder.png" />
     <Content Include="SplashScreenImage.screen-720p.jpg" />
     <Content Include="SplashScreenImage.screen-WVGA.jpg" />
     <Content Include="SplashScreenImage.screen-WXGA.jpg" />
