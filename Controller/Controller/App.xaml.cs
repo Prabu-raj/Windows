@@ -42,6 +42,18 @@ namespace Controller
             }
         }
 
+        private static MainDownloadModel downloadModels = null;
+        public static MainDownloadModel DownloadModels
+        {
+            get
+            {
+                if (downloadModels == null)
+                    downloadModels = new MainDownloadModel();
+
+                return downloadModels;
+            }
+        }
+
         private static String _presentWorkingDirectory;
 
         public static String PresentWorkingDirectory

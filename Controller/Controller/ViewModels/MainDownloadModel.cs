@@ -24,8 +24,28 @@ namespace Controller.ViewModels
             get;
             private set;
         }
-        public void LoadData()   {
+        public async void LoadData()
+        {
+            int i = 0;
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            var dataFolder = await local.CreateFolderAsync("Downloaded Files",
+                    CreationCollisionOption.OpenIfExists);
 
+            IReadOnlyCollection<StorageFile> files = await dataFolder.GetFilesAsync();
+            foreach (StorageFile file in files)
+            {
+                FilesOrFolders.Add(new DownloadModel()
+                {
+                    ID = i.ToString(),
+                    FileName = files.ElementAt(i).DisplayName,
+                    ProgressMin = "0",
+                    ProgressMax = "100",
+                    ProgressValue = "100",
+                    Visibility = false,
+                    FileExtension = file.FileType,
+                });
+                ++i;
+            }
         }
 
         private async Task WriteToFile(String folderOrFileName, int noOfPackets)
