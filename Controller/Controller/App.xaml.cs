@@ -29,30 +29,44 @@ namespace Controller
             }
         }
 
-        private static MainFolderOrFileModel folderFileModels = null;
+        private static FileModel explorerModel = null;
 
-        public static MainFolderOrFileModel FolderFileModels
+        public static FileModel ExplorerModel
         {
             get
             {
-                if (folderFileModels == null)
-                    folderFileModels = new MainFolderOrFileModel();
+                // Delay creation of the view model until necessary
+                if (explorerModel == null)
+                    explorerModel = new FileModel();
 
-                return folderFileModels;
+                return explorerModel;
             }
         }
 
-        private static MainDownloadModel downloadModels = null;
-        public static MainDownloadModel DownloadModels
-        {
-            get
-            {
-                if (downloadModels == null)
-                    downloadModels = new MainDownloadModel();
+        //private static MainFolderOrFileModel folderFileModels = null;
 
-                return downloadModels;
-            }
-        }
+        //public static MainFolderOrFileModel FolderFileModels
+        //{
+        //    get
+        //    {
+        //        if (folderFileModels == null)
+        //            folderFileModels = new MainFolderOrFileModel();
+
+        //        return folderFileModels;
+        //    }
+        //}
+
+        //private static MainDownloadModel downloadModels = null;
+        //public static MainDownloadModel DownloadModels
+        //{
+        //    get
+        //    {
+        //        if (downloadModels == null)
+        //            downloadModels = new MainDownloadModel();
+
+        //        return downloadModels;
+        //    }
+        //}
 
         private static String _presentWorkingDirectory;
 

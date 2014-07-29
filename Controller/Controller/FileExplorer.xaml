@@ -64,44 +64,45 @@
                 </Grid>
             </phone:PivotItem>
             <phone:PivotItem Header="Downloads">
-                <phone:LongListSelector x:Name="DownloadList" 
-                                    Margin="0,-10,-12,10" 
-                                    ItemsSource="{Binding Items}" 
-                                    SelectionChanged="DownloadList_SelectionChanged">
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="400"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Image Grid.Column="0" Source="/Assets/HardDrive.png" Margin="10,4,10,1"/>
-                                    <TextBlock FontSize="35" 
-                                               Grid.Column="1" 
-                                               Text="{Binding DriveLabel}" 
-                                               TextWrapping="Wrap" 
-                                               Style="{StaticResource PhoneTextExtraLargeStyle}" 
-                                               Margin="10,10,10,1"/>
-                                </Grid>
-                                <ProgressBar Grid.Column="0"
-                                             Grid.ColumnSpan="2" 
-                                             Height="10" 
-                                             Name="progessbar" 
-                                             Minimum="{Binding ProgressMin}" 
-                                             Maximum="{Binding ProgressMax}" 
-                                             Value= "{Binding ProgressValue}"
-                                             Visibility="{Binding}"
-                                             Margin="0,0,10,20"/>
-                            </StackPanel>
-
-                        </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
-
+                <Grid x:Name="DownloadPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <phone:LongListSelector Margin="12,10,12,0"
+                                    x:Name="DownloadList" 
+                                    SelectionChanged="DownloadList_SelectionChanged"
+                                    ItemsSource="{Binding DownloadedFiles}">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="400"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Image Grid.Column= "0" Source ="{Binding ImageUri}" Margin="13,7,6,6"
+                                               HorizontalAlignment="Left" 
+                                               VerticalAlignment="Top" 
+                                               Width="75"
+                                               Height="100"/>
+                                        
+                                        <TextBlock FontSize="30" Grid.Column="1" 
+                                           Text="{Binding  FileName}" 
+                                           TextWrapping="NoWrap" 
+                                           Style="{StaticResource PhoneTextExtraLargeStyle}" 
+                                           Margin="15,20,10,3"/>
+                                    </Grid>
+                                    <ProgressBar Height="10" 
+                                                 Name="progessbar" 
+                                                 Minimum="{Binding ProgressMin}" 
+                                                 Maximum="{Binding ProgressMax}" 
+                                                 Value= "{Binding ProgressValue}" 
+                                                 Margin="0,0,10,20"
+                                                 Visibility="{Binding VisibilityMode}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                </Grid>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
-
 </phone:PhoneApplicationPage>

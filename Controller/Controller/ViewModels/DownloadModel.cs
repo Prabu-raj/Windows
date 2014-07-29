@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Controller.ViewModels
 {
@@ -130,13 +131,16 @@ namespace Controller.ViewModels
             }
             set
             {
+
                 if (value)
                 {
+                    _visibility = value;
                     _visibilityMode = "Visible";
                     NotifyPropertyChanged("Visibility");
                 }
                 else
                 {
+                    _visibility = value;
                     _visibilityMode = "Collapsed";
                     NotifyPropertyChanged("Visibility");
                 }
@@ -165,7 +169,6 @@ namespace Controller.ViewModels
         private String _fileExtension;
         public String FileExtension
         {
-
             get
             {
                 return _fileExtension;
@@ -176,6 +179,7 @@ namespace Controller.ViewModels
                 if (value != _fileExtension)
                 {
                     _fileExtension = value;
+                    setImageURI();
                 }
             }
         }

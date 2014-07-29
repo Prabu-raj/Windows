@@ -21,12 +21,12 @@ namespace Controller
         public FileExplorer()
         {
             InitializeComponent();
-            DataContext = App.FolderFileModels;
+            DataContext = App.ExplorerModel;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            App.FolderFileModels.LoadData();
+            App.ExplorerModel.LoadData();
         }
 
         private void FileOrFolderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,7 +37,7 @@ namespace Controller
                 {
                     App.PresentWorkingDirectory += (FileOrFolderList.SelectedItem as FolderFileModel).FolderOrFileName + '\\';
                     App.client.Send(JsonConvert.SerializeObject(new ExplorerSignal(ExplorerSignal.GET_FILES, App.PresentWorkingDirectory)) + "#");
-                    App.FolderFileModels.LoadData();
+                    App.ExplorerModel.LoadData();
                 }
             }
             else
@@ -55,7 +55,7 @@ namespace Controller
             {
                 e.Cancel = true;
                 App.client.Send(JsonConvert.SerializeObject(new ExplorerSignal(ExplorerSignal.GET_FILES, App.PresentWorkingDirectory)) + "#");
-                App.FolderFileModels.LoadData();
+                App.ExplorerModel.LoadData();
             }
             else
             {
@@ -102,15 +102,41 @@ namespace Controller
 
             for (int i = 0; i < noOfPackets; ++i)
             {
+                int j = 0;
+                bool visible = true;
                 byte[] fileBytes = App.client.ReceiveInBytes();
 
                 using (var s = await file.OpenStreamForWriteAsync())
                 {
                     s.Seek(0, SeekOrigin.End);
                     await s.WriteAsync(fileBytes, 0, fileBytes.Length);
+                    int percentage = (int) (((float)i / noOfPackets) * 100.0);
+                   
+                    if (i == 0)
+                    {
+                        j = 1;
+                    }
+                    else
+                    {
+                        j = 0;
+                    }
+                    if (i == noOfPackets - 1)
+                    {
+                        visible = false;
+                    }
+                    App.ExplorerModel.LoadData(new DownloadModel()
+                    {
+                        ID = (App.ExplorerModel.DownloadedFiles.Count + j).ToString(),
+                        FileName = folderOrFileName,
+                        ProgressMin = "0",
+                        ProgressMax = "100",
+                        ProgressValue = percentage.ToString(),
+                        Visibility = visible,
+                        FileExtension = Path.GetExtension(folderOrFileName),
+                    });
                 }
             }
-            await Windows.System.Launcher.LaunchFileAsync(file);
+            //await Windows.System.Launcher.LaunchFileAsync(file);
         }
 
         private void Computer_Click(object sender, RoutedEventArgs e)
@@ -141,20 +167,16 @@ namespace Controller
             MessageBox.Show("You Clicked Me");
         }
 
-        private void DownloadList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void DownloadList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            String fileName = (DownloadList.SelectedItem as DownloadModel).FileName;
+
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+
+            var dataFolder = await local.GetFolderAsync("Downloaded Files");
+
+            await Windows.System.Launcher.LaunchFileAsync(await dataFolder.GetFileAsync(fileName));
 
         }
-
-        private void MainLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void DownloadList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
     }
 }

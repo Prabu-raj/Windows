@@ -183,7 +183,7 @@ namespace Controller.ViewModels
                 case ".mid":
                     ImageUri = Extensions.MID;
                     break;
-                case "mp3":
+                case ".mp3":
                     ImageUri = Extensions.MP3;
                     break;
                 case ".mp4":

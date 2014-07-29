@@ -122,6 +122,7 @@
       <DependentUpon>ThisNetwork.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DownloadModel.cs" />
+    <Compile Include="ViewModels\FileModel.cs" />
     <Compile Include="ViewModels\FolderFileModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainDownloadModel.cs" />

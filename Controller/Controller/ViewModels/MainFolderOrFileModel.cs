@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Controller.ViewModels
 {
-   public class MainFolderOrFileModel : INotifyPropertyChanged
+   public class MainFolderOrFileModel 
     {
         public MainFolderOrFileModel()
         {
@@ -85,21 +85,5 @@ namespace Controller.ViewModels
             
             this.IsDataLoaded = true;
         }
-
-       public event PropertyChangedEventHandler PropertyChanged;
-       
-       private void NotifyPropertyChanged(String propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-       /*private String replace(String replacementString)
-       {
-           return replacementString.Replace('?', '\\');
-       } */
     }
 }

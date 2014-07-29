@@ -1,12 +1,15 @@
-﻿<vms:MainFolderOrFileModel
+﻿<vms:FileModel
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vms="clr-namespace:Controller.ViewModels"
     >
 
-    <vms:MainFolderOrFileModel.FilesOrFolders>
+    <vms:FileModel.FilesOrFolders>
         <vms:FolderFileModel ID="0" FolderOrFileName="File1" ImageUri="/Assets/File.png"/>
         <vms:FolderFileModel ID="1" FolderOrFileName="File2" ImageUri="/Assets/DiskImage.png"/>
-    </vms:MainFolderOrFileModel.FilesOrFolders>
-
-</vms:MainFolderOrFileModel>
+    </vms:FileModel.FilesOrFolders>
+    <vms:FileModel.DownloadedFiles>
+        <vms:DownloadModel ID="0" ImageUri="/Assets/download.png" FileName="file1" ProgressMax="100" ProgressMin="0" ProgressValue="100" Visibility="True"/>
+        <vms:DownloadModel ID="1" ImageUri="/Assets/download.png" FileName="file2" ProgressMax="100" ProgressMin="0" ProgressValue="100" Visibility="False"/>
+    </vms:FileModel.DownloadedFiles>
+</vms:FileModel>
