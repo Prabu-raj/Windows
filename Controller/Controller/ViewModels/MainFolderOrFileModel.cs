@@ -86,7 +86,7 @@ namespace Controller.ViewModels
             this.IsDataLoaded = true;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+       public event PropertyChangedEventHandler PropertyChanged;
        
        private void NotifyPropertyChanged(String propertyName)
         {

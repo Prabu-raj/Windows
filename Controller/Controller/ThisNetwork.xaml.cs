@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Controller.ViewModels;
+using Newtonsoft.Json;
 
 namespace Controller
 {
@@ -30,14 +31,15 @@ namespace Controller
             }
 
         }
-
+        
         // Handle selection changed on LongListSelector
         private void MainLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MainLongListSelector.SelectedItem == null)
                 return;
-            App.PresentWorkingDirectory = (MainLongListSelector.SelectedItem as ItemViewModel).DriveName + '\\';
-            App.client.Send((MainLongListSelector.SelectedItem as ItemViewModel).DriveName + "#");
+            App.PresentWorkingDirectory = (MainLongListSelector.SelectedItem as ItemViewModel).DriveName;
+            //App.client.Send((MainLongListSelector.SelectedItem as ItemViewModel).DriveName + "#");
+            App.client.Send(JsonConvert.SerializeObject(new ExplorerSignal(ExplorerSignal.GET_FILES, (MainLongListSelector.SelectedItem as ItemViewModel).DriveName)) + "#");
             NavigationService.Navigate(new Uri("/FileExplorer.xaml", UriKind.RelativeOrAbsolute));
 
             MainLongListSelector.SelectedItem = null;
@@ -48,7 +50,7 @@ namespace Controller
             base.OnNavigatedFrom(e);
             if (e.Content.ToString().Equals("Controller.Option"))
             {
-                App.client.Send(FolderOrFileDetails.END_EXPLORER + "#");
+                App.client.Send(ExplorerSignal.END_EXPLORER + "#");
             }
         }
     }

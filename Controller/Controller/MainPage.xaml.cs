@@ -19,6 +19,8 @@ using Windows.Networking.Connectivity;
 using Microsoft.Phone.Reactive;
 using System.Text.RegularExpressions;
 using System.IO;
+using Windows.Storage;
+using System.Threading.Tasks;
 
 namespace Controller
 {
@@ -28,9 +30,10 @@ namespace Controller
         public MainPage()
         {
             InitializeComponent();
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
 
+        
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
             // Make sure we can perform this action with valid data
@@ -97,7 +100,5 @@ namespace Controller
                 return true;
             }
         }
-
-
     }
 }

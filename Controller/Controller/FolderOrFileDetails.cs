@@ -8,8 +8,6 @@ namespace Controller
 {
     class FolderOrFileDetails
     {
-        public const string END_EXPLORER = "END";
-       
         private String[] _folderOrFileName ;
         public String[] FolderOrFileName
         {

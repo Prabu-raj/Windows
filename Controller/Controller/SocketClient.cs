@@ -12,6 +12,7 @@ namespace Controller
     public class SocketClient
     {
         Socket _socket = null;
+        private byte[] dataBytes;
 
         // Signaling object used to notify when an asynchronous operation is completed
         static ManualResetEvent _clientDone = new ManualResetEvent(false);
@@ -166,8 +167,60 @@ namespace Controller
             {
                 response = "Socket is not initialized";
             }
-
+            
             return response;
+        }
+
+        public byte[] ReceiveInBytes()
+        {
+            string response = "Operation Timeout";
+
+            // We are receiving over an established socket connection
+            if (_socket != null)
+            {
+                // Create SocketAsyncEventArgs context object
+                SocketAsyncEventArgs socketEventArg = new SocketAsyncEventArgs();
+                socketEventArg.RemoteEndPoint = _socket.RemoteEndPoint;
+
+                // Setup the buffer to receive the data
+                socketEventArg.SetBuffer(new Byte[MAX_BUFFER_SIZE], 0, MAX_BUFFER_SIZE);
+
+                // Inline event handler for the Completed event.
+                // Note: This even handler was implemented inline in order to make 
+                // this method self-contained.
+                socketEventArg.Completed += new EventHandler<SocketAsyncEventArgs>(delegate(object s, SocketAsyncEventArgs e)
+                {
+                    if (e.SocketError == SocketError.Success)
+                    {
+                        // Retrieve the data from the buffer
+                       // response = Encoding.UTF8.GetString(e.Buffer, e.Offset, e.BytesTransferred);
+                        dataBytes = e.Buffer;
+             //           response = response.Trim('\0');
+                    }
+                    else
+                    {
+                        response = e.SocketError.ToString();
+                    }
+
+                    _clientDone.Set();
+                });
+
+                // Sets the state of the event to nonsignaled, causing threads to block
+                _clientDone.Reset();
+
+                // Make an asynchronous Receive request over the socket
+                _socket.ReceiveAsync(socketEventArg);
+
+                // Block the UI thread for a maximum of TIMEOUT_MILLISECONDS milliseconds.
+                // If no response comes back within this time then proceed
+                _clientDone.WaitOne(TIMEOUT_MILLISECONDS);
+            }
+            else
+            {
+                response = "Socket is not initialized";
+            }
+
+            return dataBytes;
         }
 
         /// <summary>
