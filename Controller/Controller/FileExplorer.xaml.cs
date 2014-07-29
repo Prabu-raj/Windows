@@ -172,11 +172,8 @@ namespace Controller
             String fileName = (DownloadList.SelectedItem as DownloadModel).FileName;
 
             StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
-
             var dataFolder = await local.GetFolderAsync("Downloaded Files");
-
             await Windows.System.Launcher.LaunchFileAsync(await dataFolder.GetFileAsync(fileName));
-
         }
     }
 }
