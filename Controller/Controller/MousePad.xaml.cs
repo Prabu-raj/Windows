@@ -32,6 +32,12 @@ namespace Controller
 
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            App.client.Send("MOUSE_CONTROL#");
+        }
+
         void Drag_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
 
@@ -64,6 +70,7 @@ namespace Controller
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+
             base.OnNavigatedFrom(e);
             if (e.Content.ToString().Equals("Controller.Option"))
             {

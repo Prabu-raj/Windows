@@ -8,14 +8,18 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Controller.Resources;
 using Controller.ViewModels;
+using System.IO.IsolatedStorage;
+using Newtonsoft.Json;
 
 namespace Controller
 {
     public partial class App : Application
     {
         public static SocketClient client = null;
-
         private static MainViewModel viewModel = null;
+        public static String IPAddress = null;
+        public static bool isNavigatedFromFileExplorer = true;
+        public static bool isTaken = false;
 
         public static MainViewModel ViewModel
         {
@@ -133,6 +137,7 @@ namespace Controller
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -140,6 +145,13 @@ namespace Controller
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
 
+            //if (IsolatedStorageSettings.ApplicationSettings.Contains("socket"))
+            //{
+            //    App.client = JsonConvert.DeserializeObject<SocketClient>(IsolatedStorageSettings.ApplicationSettings["socket"] as String);
+            //}
+            App.client = new SocketClient();
+            App.client.Connect(App.IPAddress, 1215);
+            String receive = App.client.Receive();
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -147,12 +159,33 @@ namespace Controller
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             // Ensure that required application state is persisted here.
+            //storing value
+            App.client.Send("AppPaused#");
+            //while (true)
+            //{
+            //    try
+            //    {
+            //        IsolatedStorageSettings.ApplicationSettings.Add("socket", JsonConvert.SerializeObject(App.client));
+            //        break;
+            //    }
+            //    catch (Exception)
+            //    {
+            //        IsolatedStorageSettings.ApplicationSettings.Remove("socket");
+            //    }
+            //}
+
+            //write or update value
+            //IsolatedStorageSettings.ApplicationSettings["socket"] = App.client;
+
+            //write to disk
+            //IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+
         }
 
         // Code to execute if a navigation fails

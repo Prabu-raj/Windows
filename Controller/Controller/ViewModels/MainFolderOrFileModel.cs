@@ -68,7 +68,6 @@ namespace Controller.ViewModels
                         {
                             ID = i,
                             FolderOrFileName = fileOrFolderName,
-                           // FolderOrFilePath = replace(folderOrFileDetails.FolderOrFilePath[i]),
                             FileExtension = folderOrFileDetails.FileExtension[i],
                             IsFolder = folderOrFileDetails.IsFolder[i]
 

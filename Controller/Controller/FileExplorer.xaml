@@ -78,7 +78,8 @@
                                             <ColumnDefinition Width="400"/>
                                         </Grid.ColumnDefinitions>
                                         
-                                        <Image Grid.Column= "0" Source ="{Binding ImageUri}" Margin="13,7,6,6"
+                                        <Image Grid.Column= "0" 
+                                               Source ="{Binding ImageUri}" Margin="13,7,6,0"
                                                HorizontalAlignment="Left" 
                                                VerticalAlignment="Top" 
                                                Width="75"
@@ -88,7 +89,28 @@
                                            Text="{Binding  FileName}" 
                                            TextWrapping="NoWrap" 
                                            Style="{StaticResource PhoneTextExtraLargeStyle}" 
-                                           Margin="15,20,10,3"/>
+                                           Margin="15,20,10,0"/>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="195"/>
+                                            <ColumnDefinition Width="195"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock FontSize="18" Grid.Column="0" 
+                                           Text="{Binding  PercentageCompleted}" 
+                                           TextWrapping="NoWrap" 
+                                           Style="{StaticResource PhoneTextSmallStyle}"
+                                           TextAlignment="Left"
+                                           Margin="15,0,10,3"
+                                           Visibility="{Binding VisibilityMode}"/>
+                                        <TextBlock FontSize="18" Grid.Column="1" 
+                                           Text="{Binding  FileSize}" 
+                                           TextWrapping="NoWrap" 
+                                           Style="{StaticResource PhoneTextSmallStyle}"
+                                           TextAlignment="Right"
+                                           Margin="15,0,10,3"
+                                           Visibility="{Binding VisibilityMode}"/>
                                     </Grid>
                                     <ProgressBar Height="10" 
                                                  Name="progessbar" 

@@ -18,6 +18,7 @@ namespace Controller
             InitializeComponent();
         }
 
+       
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox list = (sender) as ListBox;
@@ -25,12 +26,13 @@ namespace Controller
 
             if (item.Name == "File_Browser")
             {
-                App.client.Send("FILE_BROWSER#");
-                NavigationService.Navigate(new Uri("/ThisNetwork.xaml", UriKind.RelativeOrAbsolute));
+                //NavigationService.Navigate(new Uri("/ThisNetwork.xaml", UriKind.RelativeOrAbsolute));
+                //MessageBox.Show("File_Browser");
+                NavigationService.Navigate(new Uri("/ThisNetwork.xaml?msg=" + "Controller.Option", UriKind.Relative)); 
             }
             else if (item.Name == "Mouse_Control")
             {
-                App.client.Send("MOUSE_CONTROL#");
+                //MessageBox.Show("File_Browser");
                 NavigationService.Navigate(new Uri("/MousePad.xaml", UriKind.RelativeOrAbsolute));
             }
         }

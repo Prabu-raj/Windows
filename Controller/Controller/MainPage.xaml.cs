@@ -42,8 +42,8 @@ namespace Controller
 
                 // Instantiate the SocketClient
                 App.client = new SocketClient();
-
-                App.client.Connect(txtRemoteHost.Text, 1212);
+                App.IPAddress = txtRemoteHost.Text;
+                App.client.Connect(App.IPAddress, 1212);
                 String isConnected = App.client.Receive();
 
                 if (isConnected == "connected")

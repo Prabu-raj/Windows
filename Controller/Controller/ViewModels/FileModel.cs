@@ -27,8 +27,6 @@ namespace Controller.ViewModels
 
         public void LoadData()
         {
-            //new Thread(new ThreadStart(CreateDownloadedFileGroup)).Start();
-            //new Thread(new ThreadStart(CreateFileGroup)).Start();
             CreateDownloadedFileGroup();
             CreateFileGroup();
             this.IsDataLoaded = true;
@@ -36,66 +34,77 @@ namespace Controller.ViewModels
 
         public void LoadData(DownloadModel tempData)
         {
-          //new Thread(() => CreateDownloadedFileGroup(tempData)).Start();
             CreateDownloadedFileGroup(tempData);
         }
 
         private void CreateFileGroup()
         {
-            String data = String.Empty;
-            data = App.client.Receive();
-
-            FolderOrFileDetails folderOrFileDetails = new FolderOrFileDetails();
+            App.client.Send(JsonConvert.SerializeObject(new ExplorerSignal(ExplorerSignal.GET_FILES, App.PresentWorkingDirectory)) + "#");
+            String noOfPackets = App.client.Receive();
+            Int64 packetsCount = 0;
             try
             {
-                folderOrFileDetails = (JsonConvert.DeserializeObject<FolderOrFileDetails>(data)) as FolderOrFileDetails;
+                packetsCount = Convert.ToInt64(noOfPackets.ToString());
             }
-            catch (JsonException e)
+            catch { //MessageBox.Show("Exception");}
+
+            this.FilesOrFolders.Clear();
+
+            for (int j = 0; j < packetsCount; j++)
             {
-                MessageBox.Show(e.ToString());
-                return;
-            }
-
-
-            try
-            {
-                this.FilesOrFolders.Clear();
-
-                for (int i = 0; i < folderOrFileDetails.FolderOrFileName.Length; ++i)
+                App.client.Send("SendAnother" + "#");
+                String data = String.Empty;
+                data = App.client.Receive();
+                FolderOrFileDetails folderOrFileDetails = new FolderOrFileDetails();
+                try
                 {
-                    String fileOrFolderName = String.Empty;
-
-                    if (folderOrFileDetails.FolderOrFileName != null)
-                    {
-                        if (!folderOrFileDetails.IsFolder[i] && folderOrFileDetails.FolderOrFileName[i] != String.Empty)
-                        {
-                            fileOrFolderName = folderOrFileDetails.FolderOrFileName[i] + folderOrFileDetails.FileExtension[i];
-                        }
-                        else if (folderOrFileDetails.FolderOrFileName[i] != String.Empty)
-                        {
-                            fileOrFolderName = folderOrFileDetails.FolderOrFileName[i];
-                        }
-                        else
-                        {
-                            continue;
-                        }
-
-                        this.FilesOrFolders.Add(new FolderFileModel()
-                        {
-                            ID = i,
-                            FolderOrFileName = fileOrFolderName,
-                            FileExtension = folderOrFileDetails.FileExtension[i],
-                            IsFolder = folderOrFileDetails.IsFolder[i]
-
-                        });
-                    }
+                    folderOrFileDetails = (JsonConvert.DeserializeObject<FolderOrFileDetails>(data)) as FolderOrFileDetails;
+                }
+                catch (JsonException e)
+                {
+                    //MessageBox.Show(data);
+                    return;
                 }
 
-            }
-            catch (Exception e)
-            {
 
-                MessageBox.Show(e.ToString());
+                try
+                {
+                    for (int i = 0; i < folderOrFileDetails.FolderOrFileName.Length; ++i)
+                    {
+                        String fileOrFolderName = String.Empty;
+
+                        if (folderOrFileDetails.FolderOrFileName != null)
+                        {
+                            if (!folderOrFileDetails.IsFolder[i] && folderOrFileDetails.FolderOrFileName[i] != String.Empty)
+                            {
+                                fileOrFolderName = folderOrFileDetails.FolderOrFileName[i] + folderOrFileDetails.FileExtension[i];
+                            }
+                            else if (folderOrFileDetails.FolderOrFileName[i] != String.Empty)
+                            {
+                                fileOrFolderName = folderOrFileDetails.FolderOrFileName[i];
+                            }
+                            else
+                            {
+                                continue;
+                            }
+
+                            this.FilesOrFolders.Add(new FolderFileModel()
+                            {
+                                ID = this.FilesOrFolders.Count + 1,
+                                //ID = j * itemsPerPacket + i,
+                                FolderOrFileName = fileOrFolderName,
+                                FileExtension = folderOrFileDetails.FileExtension[i],
+                                IsFolder = folderOrFileDetails.IsFolder[i]
+
+                            });
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    MessageBox.Show(e.ToString());
+                }
             }
         }
 

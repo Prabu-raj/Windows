@@ -22,7 +22,7 @@ namespace Controller
         const int TIMEOUT_MILLISECONDS = 5000;
 
         // The maximum size of the data buffer to use with the asynchronous socket methods
-        const int MAX_BUFFER_SIZE = 2048;
+        const int MAX_BUFFER_SIZE = 4096;
 
         /// <summary>
         /// Attempt a TCP socket connection to the given host over the given port

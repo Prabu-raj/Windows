@@ -29,6 +29,41 @@ namespace Controller.ViewModels
             }
         }
 
+        private String _percentageCompleted;
+
+        public String PercentageCompleted
+        {
+            get
+            {
+                return _percentageCompleted;
+            }
+            set
+            {
+                if(value != _percentageCompleted)
+                {
+                    _percentageCompleted = value;
+                }
+            }
+        }
+
+        private String _fileSize;
+
+        public String FileSize
+        {
+            get
+            {
+                return _fileSize;
+            }
+            set
+            {
+
+                if (value != _fileSize)
+                {
+                    _fileSize = value;
+                }
+            }
+        }
+
         private String _progressMin;
 
         public String ProgressMin
